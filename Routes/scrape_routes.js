@@ -7,8 +7,6 @@ const scrapeConrollersSTP = require('../Controllers/Scraping Controllers/scrapeS
 const scrapeConrollersINV = require('../Controllers/Scraping Controllers/scrapeINVEST_controller')
 const scrapeConrollersMYTH = require('../Controllers/Scraping Controllers/scrapeMyth_controller')
 
-// router.get('/cbc/scrapeall', scrapeConrollersSTP.cbcScrapeAll);
-// router.get('/thestar/scrapeall', scrapeConrollersSTP.thestarScrapeAll);
 router.get('/collect/streetPoliticsCanada', scrapeConrollersSTP.Collect);
 
 //////////////
