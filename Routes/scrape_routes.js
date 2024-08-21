@@ -22,11 +22,6 @@ router.get('/collect/investocracy/TSLA'  , scrapeConrollersINV.CollectTsla)
 router.get('/collect/twitter/NVDA' , scrapeConrollersINV.CollectTwitter)
 router.get('/collect/twitter/PLTR' , scrapeConrollersINV.CollectTwitter)
 ////////////
-router.get('/collectFool/investocracy', scrapeConrollersINV.CollectFool);
-
-/////////////
-
-router.get('/collectInvesting/investocracy', scrapeConrollersINV.CollectInvesting);
 
 ////////------Myth---------///////////
 router.get('/collect/MYTH', scrapeConrollersMYTH.Collect);

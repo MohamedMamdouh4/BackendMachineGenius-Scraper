@@ -1,6 +1,12 @@
 require('dotenv').config()
 const { networkInterfaces } = require('os');
 
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGO_URL).then(() => {
+    console.log("Connected to MongoDB")    
+})
+
+
 const getContainerIpAddress = () => {
     const nets = networkInterfaces();
     let containerIp = 'localhost';
@@ -30,14 +36,10 @@ app.use(bodyParser.json());
 const cors = require('cors')
 app.use(cors());
 
-
 // import routes file
 const S_routes = require('./Routes/scrape_routes')
-const g_routes = require('./Routes/generate_routes')
-
 
 app.use('/',S_routes)
-app.use('/',g_routes)
 
 
 app.listen(port , async () => {

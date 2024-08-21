@@ -1,6 +1,6 @@
-const puppeteer = require('puppeteer');
-const collect_FOOLScrapers = require('../../Scrapers/INVESTOC/Collect Sites/Collect-FOOLScrapers')
-const collect_InvestingScrapers = require('../../Scrapers/INVESTOC/Collect Sites/Collect-Investor-Scraper')
+require('dotenv').config();
+const moment = require('moment')
+const scraped_dataBase = require("../../Models/Scraped/scraped_model");
 const collect_NVDA = require('../../Scrapers/INVESTOC/NVDA/NVDA-Collector')
 const collect_APPLE = require('../../Scrapers/INVESTOC/AAPL/APPLE-Collector')
 const collect_AMD = require('../../Scrapers/INVESTOC/AMD/AMD-Collector')
@@ -9,35 +9,23 @@ const collect_PLTR = require('../../Scrapers/INVESTOC/PLTR/PLTR-Collector')
 const collect_TSLA = require('../../Scrapers/INVESTOC/TSLA/TSLA-Collector')
 //////////////
 const collect_twitterPLTR = require('../../Scrapers/INVESTOC/Twitter/twitter-Colletor')
+/////////////
 
-const CollectFool = async (req, res) => {
-    try {
-        const [nvdaContent, tslaContent, pltrContent, amdContent, appleContent, amznContent] = await Promise.all([
-            collect_FOOLScrapers.scrapeNVDA(),
-            collect_FOOLScrapers.scrapeTSLA(),
-            collect_FOOLScrapers.scrapePLTR(),
-            collect_FOOLScrapers.scrapeAMD(),
-            collect_FOOLScrapers.scrapeAPPLE(),
-            collect_FOOLScrapers.scrapeAMZN(),
-        ]);
-        const allContent_from_sites = [].concat(nvdaContent ,tslaContent, pltrContent, amdContent, appleContent, amznContent);
-        res.json({ success: true, allArticles: allContent_from_sites });
-    } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
-    }
-};
 
-const CollectInvesting = async (req, res) => {
+const add_to_scraped = async (title, content, brand , stock , date) => {
     try {
-        const [nvdaContent] = await Promise.all([
-            collect_InvestingScrapers.scrapeNVDA(),
-    
-        ]);
-        // console.log("nvdaContent-->" + nvdaContent)
-        const allContent_from_sites = [].concat(nvdaContent);
-        res.json({ success: true, allArticles: allContent_from_sites });
+      const new_scraped = new scraped_dataBase({
+        title,
+        content,
+        brand,
+        stock,
+        date
+      });
+      await new_scraped.save();
+      return new_scraped;
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+      console.error(`Error saving to database: ${error}`);
+      throw new Error(`Database save failed: ${error.message}`);
     }
 };
 
@@ -52,6 +40,13 @@ const CollectNvda = async (req, res) => {
             collect_NVDA.scrape_Cnbc(),
         ]);
         const allContent_from_sites = [].concat(FoolContent , InvestorContent , TweaktownContent , BenzingaContent , CnbcContent);
+
+        for (const article of allContent_from_sites) {
+            const existingArticle = await scraped_dataBase.findOne({ title: article.title });
+            if (!existingArticle) {
+              await add_to_scraped(article.title, article.content, "investocracy" , "NVDA");
+            }
+        }
         res.json({ success: true, allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -67,6 +62,13 @@ const CollectApple = async (req, res) => {
         ]);
         // console.log("nvdaContent-->" + nvdaContent)
         const allContent_from_sites = [].concat(FoolContent , InvestorContent , BenzingaContent);
+
+        for (const article of allContent_from_sites) {
+            const existingArticle = await scraped_dataBase.findOne({ title: article.title });
+            if (!existingArticle) {
+              await add_to_scraped(article.title, article.content, "investocracy" , "AAPL" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+            }
+        }
         res.json({ success: true, allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -79,8 +81,14 @@ const CollectAmd = async (req, res) => {
             collect_AMD.scrape_Fool(),
             collect_AMD.scrape_Investor(),
         ]);
-        // console.log("nvdaContent-->" + nvdaContent)
         const allContent_from_sites = [].concat(FoolContent , InvestorContent);
+
+        for (const article of allContent_from_sites) {
+            const existingArticle = await scraped_dataBase.findOne({ title: article.title });
+            if (!existingArticle) {
+              await add_to_scraped(article.title, article.content, "investocracy" , "AMD" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+            }
+        }
         res.json({ success: true, allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -95,6 +103,14 @@ const CollectAmzn = async (req, res) => {
         ]);
         // console.log("nvdaContent-->" + nvdaContent)
         const allContent_from_sites = [].concat(FoolContent , InvestorContent);
+
+        for (const article of allContent_from_sites) {
+            const existingArticle = await scraped_dataBase.findOne({ title: article.title });
+            if (!existingArticle) {
+              await add_to_scraped(article.title, article.content, "investocracy" , "AMZN" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+            }
+        }
+
         res.json({ success: true, allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -110,6 +126,14 @@ const CollectPltr = async (req, res) => {
             collect_PLTR.scrape_Benzinga()
         ]);
         const allContent_from_sites = [].concat(FoolContent , InvestorContent , AbooContent , BenzingaContent);
+
+        for (const article of allContent_from_sites) {
+            const existingArticle = await scraped_dataBase.findOne({ title: article.title });
+            if (!existingArticle) {
+              await add_to_scraped(article.title, article.content, "investocracy" , "PLTR" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+            }
+        }
+
         res.json({ success: true, allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -124,6 +148,14 @@ const CollectTsla = async (req, res) => {
         ]);
         // console.log("nvdaContent-->" + nvdaContent)
         const allContent_from_sites = [].concat(FoolContent , InvestorContent);
+
+        for (const article of allContent_from_sites) {
+            const existingArticle = await scraped_dataBase.findOne({ title: article.title });
+            if (!existingArticle) {
+              await add_to_scraped(article.title, article.content, "investocracy" , "TSLA" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+            }
+        }
+
         res.json({ success: true, allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
@@ -143,8 +175,6 @@ const CollectTwitter = async (req, res) => {
 
 
 module.exports = {
-    CollectFool,
-    CollectInvesting,
     //////
     CollectNvda,
     CollectApple,
