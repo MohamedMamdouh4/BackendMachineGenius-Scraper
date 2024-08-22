@@ -33,7 +33,7 @@ const Collect = async (req, res) => {
     for (const article of allContent_from_sites) {
       const existingArticle = await scraped_dataBase.findOne({ title: article.title });
       if (!existingArticle) {
-        await add_to_scraped(article.title, article.content, "streetPoliticsCanada" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+        await add_to_scraped(article.title, article.content, "streetPoliticsCanada" , moment.tz("Africa/Cairo").format('MMMM Do YYYY, h:mm:ss a'));
       }
     }
     res.json({ success: true, allArticles: allContent_from_sites });
