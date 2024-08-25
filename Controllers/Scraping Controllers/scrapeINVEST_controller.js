@@ -1,5 +1,7 @@
+
 require('dotenv').config();
-const moment = require('moment')
+const moment = require('moment-timezone')
+moment.tz.setDefault("Africa/Cairo")
 const scraped_dataBase = require("../../Models/Scraped/scraped_model");
 const collect_NVDA = require('../../Scrapers/INVESTOC/NVDA/NVDA-Collector')
 const collect_APPLE = require('../../Scrapers/INVESTOC/AAPL/APPLE-Collector')
@@ -44,7 +46,7 @@ const CollectNvda = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "NVDA");
+              await add_to_scraped(article.title, article.content, "investocracy" , "NVDA" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
             }
         }
         res.json({ success: true, allArticles: allContent_from_sites });
@@ -66,7 +68,7 @@ const CollectApple = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "AAPL" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "AAPL" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
             }
         }
         res.json({ success: true, allArticles: allContent_from_sites });
@@ -86,7 +88,7 @@ const CollectAmd = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "AMD" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "AMD" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
             }
         }
         res.json({ success: true, allArticles: allContent_from_sites });
@@ -107,7 +109,7 @@ const CollectAmzn = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "AMZN" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "AMZN" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
             }
         }
 
@@ -130,7 +132,7 @@ const CollectPltr = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "PLTR" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "PLTR" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
             }
         }
 
@@ -152,7 +154,7 @@ const CollectTsla = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "TSLA" , moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "TSLA" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
             }
         }
 
