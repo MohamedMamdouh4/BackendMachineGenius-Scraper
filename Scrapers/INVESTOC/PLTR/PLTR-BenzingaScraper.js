@@ -33,7 +33,7 @@ const scrapeContentFromURL = async (page, url) => {
       timeout: 180000
     });
     const content = await page.evaluate(() => {
-    const ScrapeList = document.querySelectorAll("div .sc-gpielE p");
+    const ScrapeList = document.querySelectorAll(".article-content-body .article-content-body-only p");
       return Array.from(ScrapeList).map(Scrape => Scrape.innerText);
     });
     return content.join(' ');

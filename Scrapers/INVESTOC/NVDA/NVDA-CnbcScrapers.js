@@ -4,7 +4,7 @@ const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.cnbc.com/quotes/NVDA?tab=news", {
       waitUntil: "domcontentloaded",
-      timeout: 180000
+      timeout: 280000
     });
     const URLs = await page.evaluate(() => {
       const ScrapeList = document.querySelectorAll('div[data-test="QuoteNews-1"] .LatestNews-list li .LatestNews-container .LatestNews-headlineWrapper a');
@@ -30,7 +30,7 @@ const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
       waitUntil: "domcontentloaded",
-      timeout: 180000
+      timeout: 280000
     });
     const content = await page.evaluate(() => {
     const ScrapeList = document.querySelectorAll(".group p");

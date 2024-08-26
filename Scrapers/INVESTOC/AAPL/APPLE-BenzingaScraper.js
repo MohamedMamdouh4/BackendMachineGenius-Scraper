@@ -4,7 +4,7 @@ const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.benzinga.com/quote/AAPL/news", {
       waitUntil: "domcontentloaded",
-      timeout: 180000
+
     });
     const URLs = await page.evaluate(() => {
       const ScrapeList = document.querySelectorAll(".news-content div ul li a");
@@ -30,10 +30,9 @@ const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
       waitUntil: "domcontentloaded",
-      timeout: 180000
     });
     const content = await page.evaluate(() => {
-    const ScrapeList = document.querySelectorAll("div .sc-gpielE p");
+    const ScrapeList = document.querySelectorAll(".article-content-body .article-content-body-only p");
       return Array.from(ScrapeList).map(Scrape => Scrape.innerText);
     });
     return content.join(' ');

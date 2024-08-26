@@ -143,7 +143,7 @@ const scrape_Benzinga = async () => {
             try 
             {
                 const content = await BenzingaScrape.scrapeContentFromURL(page, href);
-                if(title && content)
+                if(title || content)
                 {
                     allContent.push({ url: href, title, content });
                 }
