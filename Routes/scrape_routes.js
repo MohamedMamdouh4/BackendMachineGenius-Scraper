@@ -7,7 +7,8 @@ const scrapeConrollersSTP = require('../Controllers/Scraping Controllers/scrapeS
 const scrapeConrollersINV = require('../Controllers/Scraping Controllers/scrapeINVEST_controller')
 const scrapeConrollersMYTH = require('../Controllers/Scraping Controllers/scrapeMyth_controller')
 
-router.get('/collect/streetPoliticsCanada', scrapeConrollersSTP.Collect);
+router.get('/collect/streetPoliticsCanada', scrapeConrollersSTP.Collect_Canada);
+router.get('/collect/streetPoliticsUK', scrapeConrollersSTP.Collect_UK);
 
 //////////////
 router.get('/collect/investocracy/NVDA' , scrapeConrollersINV.CollectNvda)
