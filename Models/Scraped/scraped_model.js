@@ -7,7 +7,7 @@ const scrapedSchema = new Schema({
   {
     type: String,
     unique: false,
-    required: true, 
+    required: false, 
   },
   content: 
   {

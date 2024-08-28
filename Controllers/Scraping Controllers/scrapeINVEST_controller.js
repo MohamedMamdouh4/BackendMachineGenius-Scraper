@@ -43,13 +43,15 @@ const CollectNvda = async (req, res) => {
         ]);
         const allContent_from_sites = [].concat(FoolContent , InvestorContent , TweaktownContent , BenzingaContent , CnbcContent);
 
+        var flag = 0 
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
               await add_to_scraped(article.title, article.content, "investocracy" , "NVDA" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              flag = 1
             }
         }
-        res.json({ success: true, allArticles: allContent_from_sites });
+        res.json({ success: true, StartOpenAI: flag , allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
@@ -65,13 +67,15 @@ const CollectApple = async (req, res) => {
         // console.log("nvdaContent-->" + nvdaContent)
         const allContent_from_sites = [].concat(FoolContent , InvestorContent , BenzingaContent);
 
+        var flag = 0
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
               await add_to_scraped(article.title, article.content, "investocracy" , "AAPL" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              flag = 1
             }
         }
-        res.json({ success: true, allArticles: allContent_from_sites });
+        res.json({ success: true, StartOpenAI: flag ,  allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
@@ -85,13 +89,15 @@ const CollectAmd = async (req, res) => {
         ]);
         const allContent_from_sites = [].concat(FoolContent , InvestorContent);
 
+        var flag = 0
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
               await add_to_scraped(article.title, article.content, "investocracy" , "AMD" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              flag = 1
             }
         }
-        res.json({ success: true, allArticles: allContent_from_sites });
+        res.json({ success: true, StartOpenAI: flag , allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
@@ -106,14 +112,16 @@ const CollectAmzn = async (req, res) => {
         // console.log("nvdaContent-->" + nvdaContent)
         const allContent_from_sites = [].concat(FoolContent , InvestorContent);
 
+        var flag = 0
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
               await add_to_scraped(article.title, article.content, "investocracy" , "AMZN" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              flag = 1
             }
         }
 
-        res.json({ success: true, allArticles: allContent_from_sites });
+        res.json({ success: true, StartOpenAI: flag  , allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
@@ -129,14 +137,16 @@ const CollectPltr = async (req, res) => {
         ]);
         const allContent_from_sites = [].concat(FoolContent , InvestorContent , AbooContent , BenzingaContent);
 
+        var flag = 0
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
               await add_to_scraped(article.title, article.content, "investocracy" , "PLTR" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              flag = 1
             }
         }
 
-        res.json({ success: true, allArticles: allContent_from_sites });
+        res.json({ success: true, StartOpenAI: flag ,  allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
@@ -151,14 +161,16 @@ const CollectTsla = async (req, res) => {
         // console.log("nvdaContent-->" + nvdaContent)
         const allContent_from_sites = [].concat(FoolContent , InvestorContent);
 
+        var flag = 0
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
               await add_to_scraped(article.title, article.content, "investocracy" , "TSLA" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              flag = 1; 
             }
         }
 
-        res.json({ success: true, allArticles: allContent_from_sites });
+        res.json({ success: true, StartOpenAI: flag ,  allArticles: allContent_from_sites });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }

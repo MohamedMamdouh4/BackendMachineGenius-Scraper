@@ -23,7 +23,7 @@ const scrapeTelegraph = async () => {
             try 
             {
                 const content = await telegraphScrape.scrapeContentFromURL(page, href);
-                if(title)
+                if(title && content)
                 {
                     allContent.push({ url: href, title, content });
                 }
@@ -61,7 +61,7 @@ const scrapeBbc = async () => {
             try 
             {
                 const content = await bbcScrape.scrapeContentFromURL(page, href);
-                if(title)
+                if(title && content)
                 {
                     allContent.push({ url: href, title, content });
                 }
@@ -99,7 +99,7 @@ const scrapeReddit = async () => {
             try 
             {
                 const content = await redditScrape.scrapeContentFromURL(page, href);
-                if(title)
+                if(title && content)
                 {
                     allContent.push({ url: href, title, content });
                 }

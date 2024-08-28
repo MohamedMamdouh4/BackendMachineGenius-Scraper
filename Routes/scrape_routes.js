@@ -9,6 +9,7 @@ const scrapeConrollersMYTH = require('../Controllers/Scraping Controllers/scrape
 
 router.get('/collect/streetPoliticsCanada', scrapeConrollersSTP.Collect_Canada);
 router.get('/collect/streetPoliticsUK', scrapeConrollersSTP.Collect_UK);
+router.get('/collect/streetPoliticsAfrica', scrapeConrollersSTP.Collect_Africa);
 
 //////////////
 router.get('/collect/investocracy/NVDA' , scrapeConrollersINV.CollectNvda)
