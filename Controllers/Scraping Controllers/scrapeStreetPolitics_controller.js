@@ -40,7 +40,7 @@ const Collect_Canada = async (req, res) => {
         flag = 1
       }
     }
-    res.json({ success: true, StartOopenAI: flag ,  allArticles: allContent_from_sites });
+    res.json({ success: true, StartOpenAI: flag ,  allArticles: allContent_from_sites });
   } catch (error) {
     console.error(`Error in Collect: ${error.message}`);
     res.status(500).json({ success: false, error: error.message });

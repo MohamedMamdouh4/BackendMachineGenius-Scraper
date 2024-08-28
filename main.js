@@ -36,6 +36,11 @@ app.use(bodyParser.json());
 const cors = require('cors')
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.send('Server is running Ok!');
+});
+
+
 // import routes file
 const S_routes = require('./Routes/scrape_routes')
 
