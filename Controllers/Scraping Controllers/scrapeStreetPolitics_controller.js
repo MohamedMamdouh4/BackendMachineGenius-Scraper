@@ -1,18 +1,20 @@
 require('dotenv').config();
-const moment = require('moment')
+const moment = require('moment-timezone')
+moment.tz.setDefault("Africa/Cairo")
 const scraped_dataBase = require("../../Models/Scraped/scraped_model");
 const verifyToken = require('../../Middlewares/verify_token');
 const collectCanadaScrapers = require('../../Scrapers/STP/Canada/Collect-STPScrapers');
 const collectUKScrapers = require('../../Scrapers/STP/UK/Collect-STPScrapers');
 const collectAfricaScrapers = require('../../Scrapers/STP/Africa/Collect-STPScrapers');
 
-const add_to_scraped = async (title, content, brand , date) => {
+const add_to_scraped = async (title, content, brand ) => {
   try {
     const new_scraped = new scraped_dataBase({
       title,
       content,
       brand,
-      date
+      date : moment().format('MMMM Do YYYY, h:mm:ss a'),
+      time : moment().valueOf()
     });
     await new_scraped.save();
     return new_scraped;
@@ -36,7 +38,7 @@ const Collect_Canada = async (req, res) => {
     for (const article of allContent_from_sites) {
       const existingArticle = await scraped_dataBase.findOne({ title: article.title });
       if (!existingArticle) {
-        await add_to_scraped(article.title, article.content, "streetPoliticsCanada" , moment.tz("Africa/Cairo").format('MMMM Do YYYY, h:mm:ss a'));
+        await add_to_scraped(article.title, article.content, "streetPoliticsCanada" );
         flag = 1
       }
     }
@@ -62,7 +64,7 @@ const Collect_UK = async (req, res) => {
       const existingArticle = await scraped_dataBase.findOne({ title: article.title });
       if (!existingArticle) {
         flag = 1
-        await add_to_scraped(article.title, article.content, "streetPoliticsUK" , moment.tz("Africa/Cairo").format('MMMM Do YYYY, h:mm:ss a'));
+        await add_to_scraped(article.title, article.content, "streetPoliticsUK"  );
       }
     }
 
@@ -87,7 +89,7 @@ const Collect_Africa = async (req, res) => {
     for (const article of allContent_from_sites) {
       const existingArticle = await scraped_dataBase.findOne({ title: article.content.title || article.title});
       if (!existingArticle) {
-        await add_to_scraped(article.content.title , article.content.content, "streetPoliticsAfrica" , moment.tz("Africa/Cairo").format('MMMM Do YYYY, h:mm:ss a'));
+        await add_to_scraped(article.content.title || article.title , article.content.content || article.title, "streetPoliticsAfrica"  );
         flag = 1
       }
     }

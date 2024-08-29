@@ -14,14 +14,15 @@ const collect_twitterPLTR = require('../../Scrapers/INVESTOC/Twitter/twitter-Col
 /////////////
 
 
-const add_to_scraped = async (title, content, brand , stock , date) => {
+const add_to_scraped = async (title, content, brand , stock) => {
     try {
       const new_scraped = new scraped_dataBase({
         title,
         content,
         brand,
         stock,
-        date
+        date : moment().format('MMMM Do YYYY, h:mm:ss a'),
+        time : moment().valueOf()
       });
       await new_scraped.save();
       return new_scraped;
@@ -47,7 +48,7 @@ const CollectNvda = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "NVDA" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "NVDA"  );
               flag = 1
             }
         }
@@ -71,7 +72,7 @@ const CollectApple = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "AAPL" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "AAPL"  );
               flag = 1
             }
         }
@@ -93,7 +94,7 @@ const CollectAmd = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "AMD" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "AMD"  );
               flag = 1
             }
         }
@@ -116,7 +117,7 @@ const CollectAmzn = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "AMZN" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "AMZN"  );
               flag = 1
             }
         }
@@ -141,7 +142,7 @@ const CollectPltr = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "PLTR" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "PLTR"  );
               flag = 1
             }
         }
@@ -165,7 +166,7 @@ const CollectTsla = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "TSLA" ,  moment().format('MMMM Do YYYY, h:mm:ss a'));
+              await add_to_scraped(article.title, article.content, "investocracy" , "TSLA"  );
               flag = 1; 
             }
         }
