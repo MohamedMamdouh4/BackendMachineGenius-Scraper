@@ -2,6 +2,7 @@
 require('dotenv').config();
 const moment = require('moment-timezone')
 moment.tz.setDefault("Africa/Cairo")
+const scrapedDBController = require("../Scraped DB Controller/scrapedDB_controller")
 const scraped_dataBase = require("../../Models/Scraped/scraped_model");
 const collect_NVDA = require('../../Scrapers/INVESTOC/NVDA/NVDA-Collector')
 const collect_APPLE = require('../../Scrapers/INVESTOC/AAPL/APPLE-Collector')
@@ -13,24 +14,6 @@ const collect_TSLA = require('../../Scrapers/INVESTOC/TSLA/TSLA-Collector')
 const collect_twitterPLTR = require('../../Scrapers/INVESTOC/Twitter/twitter-Colletor')
 /////////////
 
-
-const add_to_scraped = async (title, content, brand , stock) => {
-    try {
-      const new_scraped = new scraped_dataBase({
-        title,
-        content,
-        brand,
-        stock,
-        date : moment().format('MMMM Do YYYY, h:mm:ss a'),
-        time : moment().valueOf()
-      });
-      await new_scraped.save();
-      return new_scraped;
-    } catch (error) {
-      console.error(`Error saving to database: ${error}`);
-      throw new Error(`Database save failed: ${error.message}`);
-    }
-};
 
 /////////////------Stocks Gtom Sites------///////////////////
 const CollectNvda = async (req, res) => {
@@ -48,7 +31,7 @@ const CollectNvda = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "NVDA"  );
+              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "NVDA"  );
               flag = 1
             }
         }
@@ -72,7 +55,7 @@ const CollectApple = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "AAPL"  );
+              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "AAPL"  );
               flag = 1
             }
         }
@@ -94,7 +77,7 @@ const CollectAmd = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "AMD"  );
+              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "AMD"  );
               flag = 1
             }
         }
@@ -117,7 +100,7 @@ const CollectAmzn = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "AMZN"  );
+              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "AMZN"  );
               flag = 1
             }
         }
@@ -142,7 +125,7 @@ const CollectPltr = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "PLTR"  );
+              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "PLTR"  );
               flag = 1
             }
         }
@@ -166,7 +149,7 @@ const CollectTsla = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await add_to_scraped(article.title, article.content, "investocracy" , "TSLA"  );
+              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "TSLA"  );
               flag = 1; 
             }
         }

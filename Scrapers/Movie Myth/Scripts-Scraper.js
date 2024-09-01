@@ -33,7 +33,7 @@ const scrapeContentFromURL = async (page, url) => {
       timeout: 180000
     });
     const content = await page.evaluate(() => {
-    const ScrapeList = document.querySelectorAll("blockquote .wselect-cnt p");
+    const ScrapeList = document.querySelector("blockquote .wselect-cnt p");
       return Array.from(ScrapeList).map(Scrape => Scrape.innerText);
     });
     return content.join(' ');

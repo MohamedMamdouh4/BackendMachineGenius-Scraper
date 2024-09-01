@@ -22,7 +22,7 @@ const scrapeURLs = async () => {
       });
   
       const URLs = await page.evaluate(() => {
-        const ScrapeList = document.querySelectorAll("a.card.cardDefault , a.card.cardText , a.card.cardListing.rightImage:not(a.flag-live) ");
+        const ScrapeList = document.querySelector("a.card.cardDefault , a.card.cardText , a.card.cardListing.rightImage:not(a.flag-live) ");
         return Array.from(ScrapeList).map((Scrape) => {
           let href = Scrape.getAttribute("href");
           let title = Scrape.querySelector('.headline').innerText;
@@ -64,12 +64,12 @@ const scrapeContentFromURL = async (url) => {
       });
   
       const content = await page.evaluate(() => {
-        const ScrapeList = document.querySelectorAll(".story p");
-        return Array.from(ScrapeList).map((Scrape) => Scrape.innerText);
+        const ScrapeList = document.querySelector(".story");
+        return (ScrapeList.innerHTML);
       });
   
       await browser.close();
-      return content.join(' ');
+      return content;
     } catch (error) {
       await browser.close();
       console.error(`Error during content scraping from ${url}:`, error);

@@ -31,10 +31,10 @@ const scrapeContentFromURL = async (page, url) => {
       timeout: 120000
     });
     const content = await page.evaluate(() => {
-      const ScrapeList = document.querySelectorAll("article p");
-      return Array.from(ScrapeList).map(Scrape => Scrape.innerText);
+      const ScrapeList = document.querySelector("article");
+      return(ScrapeList.innerHTML);
     });
-    return content.join(' ');
+    return content;
   } catch (error) {
     console.error(`Error during content scraping from ${url}:`, error);
     throw error;

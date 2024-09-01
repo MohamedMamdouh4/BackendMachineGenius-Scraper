@@ -34,10 +34,10 @@ const scrapeContentFromURL = async (page, url) => {
       timeout: 120000,
     });
         const content = await page.evaluate(() => {
-        const ScrapeList = document.querySelectorAll("#main-content p");      
-          return Array.from(ScrapeList).map(Scrape => Scrape.innerText);
+        const ScrapeList = document.querySelector("#main-content");      
+          return (ScrapeList.innerHTML);
         });
-        return content.join(' ');
+        return content;
   }
   catch (error) {
     // await browser.close();

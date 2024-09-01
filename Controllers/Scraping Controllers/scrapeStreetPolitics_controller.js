@@ -1,28 +1,13 @@
 require('dotenv').config();
 const moment = require('moment-timezone')
 moment.tz.setDefault("Africa/Cairo")
+const scrapedDBController = require("../Scraped DB Controller/scrapedDB_controller")
 const scraped_dataBase = require("../../Models/Scraped/scraped_model");
 const verifyToken = require('../../Middlewares/verify_token');
 const collectCanadaScrapers = require('../../Scrapers/STP/Canada/Collect-STPScrapers');
 const collectUKScrapers = require('../../Scrapers/STP/UK/Collect-STPScrapers');
 const collectAfricaScrapers = require('../../Scrapers/STP/Africa/Collect-STPScrapers');
 
-const add_to_scraped = async (title, content, brand ) => {
-  try {
-    const new_scraped = new scraped_dataBase({
-      title,
-      content,
-      brand,
-      date : moment().format('MMMM Do YYYY, h:mm:ss a'),
-      time : moment().valueOf()
-    });
-    await new_scraped.save();
-    return new_scraped;
-  } catch (error) {
-    console.error(`Error saving to database: ${error}`);
-    throw new Error(`Database save failed: ${error.message}`);
-  }
-};
 
 const Collect_Canada = async (req, res) => {
   try {
@@ -38,7 +23,7 @@ const Collect_Canada = async (req, res) => {
     for (const article of allContent_from_sites) {
       const existingArticle = await scraped_dataBase.findOne({ title: article.title });
       if (!existingArticle) {
-        await add_to_scraped(article.title, article.content, "streetPoliticsCanada" );
+        await scrapedDBController.add_to_scraped(article.title, article.content, "streetPoliticsCanada" );
         flag = 1
       }
     }
@@ -64,7 +49,7 @@ const Collect_UK = async (req, res) => {
       const existingArticle = await scraped_dataBase.findOne({ title: article.title });
       if (!existingArticle) {
         flag = 1
-        await add_to_scraped(article.title, article.content, "streetPoliticsUK"  );
+        await scrapedDBController.add_to_scraped(article.title, article.content, "streetPoliticsUK"  );
       }
     }
 
@@ -89,7 +74,7 @@ const Collect_Africa = async (req, res) => {
     for (const article of allContent_from_sites) {
       const existingArticle = await scraped_dataBase.findOne({ title: article.content.title || article.title});
       if (!existingArticle) {
-        await add_to_scraped(article.content.title || article.title , article.content.content || article.title, "streetPoliticsAfrica"  );
+        await scrapedDBController.add_to_scraped(article.content.title || article.title , article.content.content || article.title, "streetPoliticsAfrica"  );
         flag = 1
       }
     }

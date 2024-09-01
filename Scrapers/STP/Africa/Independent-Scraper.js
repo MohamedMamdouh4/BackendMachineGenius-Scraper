@@ -32,8 +32,8 @@ const scrapeContentFromURL = async (page, url) => {
       });
   
       const content = await page.evaluate(() => {
-        const ScrapeList = document.querySelectorAll(".sc-jbiisr-0.ebhxqi.sc-jbiisr-2.loNmgs p");
-        return Array.from(ScrapeList).map(Scrape => Scrape.innerText).join(' ');
+        const ScrapeList = document.querySelector(".sc-jbiisr-0.ebhxqi.sc-jbiisr-2.loNmgs p");
+        return (ScrapeList.innerHTML);
       });
   
       const title = await page.evaluate(() => {

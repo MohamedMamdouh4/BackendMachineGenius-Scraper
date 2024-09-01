@@ -33,10 +33,10 @@ const scrapeContentFromURL = async (page, url) => {
       timeout: 180000
     });
     const content = await page.evaluate(() => {
-    const ScrapeList = document.querySelectorAll(".article-content-body .article-content-body-only p");
-      return Array.from(ScrapeList).map(Scrape => Scrape.innerText);
+    const ScrapeList = document.querySelector(".article-content-body .article-content-body-only");
+      return (ScrapeList.innerHTML);
     });
-    return content.join(' ');
+    return content;
   }
     catch (error) {
       // await browser.close();

@@ -40,11 +40,11 @@ const scrapeContentFromURL = async (page, url) => {
     });
 
     const content = await page.evaluate(() => {
-      const ScrapeList = document.querySelectorAll(".article__body p");
-      return Array.from(ScrapeList).map(Scrape => Scrape.innerText);
+      const ScrapeList = document.querySelector(".article__body");
+      return (ScrapeList.innerHTML);
     });
 
-    return content.join(' ');
+    return content;
   } catch (error) {
     console.error(`Error during content scraping from ${url}:`, error);
     throw error;

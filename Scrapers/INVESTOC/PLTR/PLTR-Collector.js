@@ -25,7 +25,7 @@ const scrape_Fool = async () => {
             try 
             {
                 const content = await FoolScrape.scrapeContentFromURL(page, href);
-                if(title)
+                if(title && content && content!== "Error fetching content" )
                 {
                     allContent.push({ url: href, title, content });
                 }
@@ -64,7 +64,7 @@ const scrape_Investor = async () => {
             try 
             {
                 const content = await InvetorScrape.scrapeContentFromURL(page, href);
-                if(title)
+                if(title && content && content!== "Error fetching content" )
                 {
                     allContent.push({ url: href, title, content });
                 }
@@ -103,7 +103,7 @@ const scrape_Abbo = async () => {
             try 
             {
                 const content = await AbboScrape.scrapeContentFromURL(page, href);
-                if(title)
+                if(title && content && content!== "Error fetching content" )
                 {
                     allContent.push({ url: href, title, content });
                 }

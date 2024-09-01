@@ -31,7 +31,7 @@ const scrapeURLs = async (page, url) => {
   await autoScroll(page);
 
   const URLs = await page.evaluate(() => {
-    const ScrapeList = document.querySelectorAll('article a[href*="/status/"]');
+    const ScrapeList = document.querySelector('article a[href*="/status/"]');
     return Array.from(ScrapeList).slice(0, 40).map(Scrape => {
       let href = Scrape.getAttribute("href");
       let title = Scrape.innerText;
