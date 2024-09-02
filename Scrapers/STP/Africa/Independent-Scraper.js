@@ -12,7 +12,7 @@ const scrapeURLs = async (page) => {
         let href = Scrape.getAttribute("href");
         // let title = Scrape.querySelector('.title')?.innerText || "";
         if (!href.startsWith('http')) {
-          href = `https://www.independent.co.uk/${href}`;
+          href = `https://www.independent.co.uk${href}`;
         }
         return { href };
       });
@@ -32,7 +32,7 @@ const scrapeContentFromURL = async (page, url) => {
       });
   
       const content = await page.evaluate(() => {
-        const ScrapeList = document.querySelector(".sc-jbiisr-0.ebhxqi.sc-jbiisr-2.loNmgs p");
+        const ScrapeList = document.querySelector(".sc-jbiisr-0.ebhxqi.sc-jbiisr-2.loNmgs");
         return (ScrapeList.innerHTML);
       });
   
