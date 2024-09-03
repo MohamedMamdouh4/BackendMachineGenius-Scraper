@@ -40,7 +40,7 @@ const scrapeContentFromURL = async (page, url) => {
     });
 
     const content = await page.evaluate(() => {
-      const ScrapeList = document.querySelector(".article__body");
+      const ScrapeList = document.querySelector(".article-content__text");
       return (ScrapeList.innerHTML);
     });
 
