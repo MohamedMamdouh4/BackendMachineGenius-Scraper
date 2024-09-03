@@ -74,7 +74,7 @@ const Collect_Africa = async (req, res) => {
     for (const article of allContent_from_sites) {
       const existingArticle = await scraped_dataBase.findOne({ title: article.content.title || article.title});
       if (!existingArticle) {
-        await scrapedDBController.add_to_scraped(article.content.title || article.title , article.content.content || article.title, "streetPoliticsAfrica"  );
+        await scrapedDBController.add_to_scraped(article.content.title || article.title , article.content.content || article.content, "streetPoliticsAfrica"  );
         flag = 1
       }
     }
