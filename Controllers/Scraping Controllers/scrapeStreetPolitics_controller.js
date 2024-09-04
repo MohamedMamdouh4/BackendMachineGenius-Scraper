@@ -62,13 +62,14 @@ const Collect_UK = async (req, res) => {
 
 const Collect_Africa = async (req, res) => {
   try {
-    const [ bbcContent , independentContent , africanewsContent] = await Promise.all([
+    const [bbcContent , independentContent , africanewsContent , issafricaContent] = await Promise.all([
       collectAfricaScrapers.scrapeBbc(),
       collectAfricaScrapers.scrapeIndependent(),
       collectAfricaScrapers.scrapeAfricanews(),
+      collectAfricaScrapers.scrapeIssafrica()
     ]);
 
-    const allContent_from_sites = [ ...bbcContent , ...independentContent , ...africanewsContent];
+    const allContent_from_sites = [ ...bbcContent , ...independentContent , ...africanewsContent ,  ...issafricaContent];
 
     var flag = 0;
     for (const article of allContent_from_sites) {
