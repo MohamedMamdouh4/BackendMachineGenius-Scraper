@@ -10,6 +10,7 @@ const collect_AMD = require('../../Scrapers/INVESTOC/AMD/AMD-Collector')
 const collect_AMZN = require('../../Scrapers/INVESTOC/AMZN/AMZN-Collector')
 const collect_PLTR = require('../../Scrapers/INVESTOC/PLTR/PLTR-Collector')
 const collect_TSLA = require('../../Scrapers/INVESTOC/TSLA/TSLA-Collector')
+const collect_ALPHA = require('../../Scrapers/INVESTOC/ALPHA/GOOG-Collector')
 //////////////
 const collect_twitterPLTR = require('../../Scrapers/INVESTOC/Twitter/twitter-Colletor')
 /////////////
@@ -160,6 +161,31 @@ const CollectTsla = async (req, res) => {
     }
 };
 
+const CollectAlpha = async (req, res) => {
+    try {
+        const [FoolContent , InvestorContent , benzengaContent] = await Promise.all([
+            collect_ALPHA.scrape_Fool(),
+            collect_ALPHA.scrape_Investor(),
+            collect_ALPHA.scrape_Benzinga()
+        ]);
+        // console.log("nvdaContent-->" + nvdaContent)
+        const allContent_from_sites = [].concat(FoolContent , InvestorContent , benzengaContent);
+
+        var flag = 0
+        for (const article of allContent_from_sites) {
+            const existingArticle = await scraped_dataBase.findOne({ title: article.title });
+            if (!existingArticle) {
+              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "ALPHA" );
+              flag = 1; 
+            }
+        }
+
+        res.json({ success: true, StartOpenAI: flag ,  allArticles: allContent_from_sites });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+
 ////////////-------Stocks From Twitter--------/////////////////
 const CollectTwitter = async (req, res) => {
     try {
@@ -180,6 +206,7 @@ module.exports = {
     CollectAmzn,
     CollectPltr,
     CollectTsla,
+    CollectAlpha,
     //////
     CollectTwitter
 }

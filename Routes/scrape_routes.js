@@ -18,6 +18,7 @@ router.get('/collect/investocracy/AMD'  , scrapeConrollersINV.CollectAmd)
 router.get('/collect/investocracy/AMZN'  , scrapeConrollersINV.CollectAmzn)
 router.get('/collect/investocracy/PLTR'  , scrapeConrollersINV.CollectPltr)
 router.get('/collect/investocracy/TSLA'  , scrapeConrollersINV.CollectTsla)
+router.get('/collect/investocracy/ALPHA'  , scrapeConrollersINV.CollectAlpha)
 //////////////
 
 /////////////

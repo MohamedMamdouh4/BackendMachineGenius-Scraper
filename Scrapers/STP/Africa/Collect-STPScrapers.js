@@ -10,8 +10,7 @@ const sites =
   "https://issafrica.org/research/africa-report",
   "https://issafrica.org/research/central-africa-report",
   "https://issafrica.org/research/east-africa-report",
-  "https://issafrica.org/research/southern-africa-report",
-  "https://issafrica.org/pscreport"
+  "https://issafrica.org/research/southern-africa-report"
 ]
 
 const scrapeBbc = async () => {
@@ -116,7 +115,6 @@ const scrapeAfricanews = async () => {
                 }
             } catch (error) {
                 console.error(`Error scraping content from ${href}:`, error);
-                allContent.push({ url: href, title, content: 'Error fetching content' });
             }
         }
         return allContent;

@@ -2,17 +2,13 @@ const puppeteer = require('puppeteer');
 
 const scrapeURLs = async (page) => {
   try {
-    await page.goto("https://www.cnbc.com/quotes/NVDA?tab=news", {
-      waitUntil: "domcontentloaded",
-      timeout: 280000
-    });
-    const URLs = await page.evaluate(() => {
-      const ScrapeList = document.querySelectorAll('div[data-test="QuoteNews-1"] .LatestNews-list li .LatestNews-container .LatestNews-headlineWrapper a');
+      const URLs = await page.evaluate(() => {
+      const ScrapeList = document.querySelectorAll(".news-content div ul li a");
       return Array.from(ScrapeList).map(Scrape => {
         let href = Scrape.getAttribute("href");
-        let title = Scrape.innerText;
+        let title = Scrape.querySelector('.content-title span').innerText;
         if (!href.startsWith('http')) {
-          href = `https://www.cnbc.com/${href}`;
+          href = `https://www.benzinga.com/${href}`;
         }
         console.log(href , title);
         return { href, title };
@@ -30,11 +26,10 @@ const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
       waitUntil: "domcontentloaded",
-      timeout: 280000
     });
     const content = await page.evaluate(() => {
-    const ScrapeList = document.querySelector(".ArticleBody-articleBody");
-      return (ScrapeList.innerHTML);
+    const ScrapeList = document.querySelector(".article-content-body .article-content-body-only");
+      return(ScrapeList.innerHTML);
     });
     return content;
   }

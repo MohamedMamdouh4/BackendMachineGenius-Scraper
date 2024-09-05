@@ -1,4 +1,3 @@
-const puppeteer = require('puppeteer');
 
 const scrapeURLs = async (page) => {
   try {
@@ -6,9 +5,8 @@ const scrapeURLs = async (page) => {
       waitUntil: "domcontentloaded",
       timeout: 120000
     });
-
     const URLs = await page.evaluate(() => {
-      const ScrapeList = document.querySelectorAll(".main-content .layout.theme-block__spacer .media__body.teaser__body h2 a");
+      const ScrapeList = document.querySelectorAll(".layout.theme-block__spacer.jsArticleList h3 a");
       return Array.from(ScrapeList).map(Scrape => {
         let href = Scrape.getAttribute("href");
         let title = Scrape.innerText || "";
