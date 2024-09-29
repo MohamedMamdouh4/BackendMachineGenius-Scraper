@@ -3,9 +3,10 @@ const moment = require('moment-timezone')
 moment.tz.setDefault("Africa/Cairo")
 require('dotenv/config');
 
-const add_to_scraped = async (title, content, brand , stock) => {
+const add_to_scraped = async (url , title, content, brand , stock) => {
     try {
       const new_scraped = new scraped_dataBase({
+        url,
         title,
         content,
         brand,

@@ -32,7 +32,7 @@ const CollectNvda = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "NVDA"  );
+              await scrapedDBController.add_to_scraped(article.url , article.title , article.content, "investocracy" , "NVDA"  );
               flag = 1
             }
         }
@@ -56,7 +56,7 @@ const CollectApple = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "AAPL"  );
+              await scrapedDBController.add_to_scraped(article.url , article.title , article.content, "investocracy" , "AAPL"  );
               flag = 1
             }
         }
@@ -78,7 +78,7 @@ const CollectAmd = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "AMD"  );
+              await scrapedDBController.add_to_scraped(article.url , article.title , article.content, "investocracy" , "AMD"  );
               flag = 1
             }
         }
@@ -99,9 +99,10 @@ const CollectAmzn = async (req, res) => {
 
         var flag = 0
         for (const article of allContent_from_sites) {
+            console.log("URL------>",article.url);
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "AMZN"  );
+              await scrapedDBController.add_to_scraped(article.url , article.title , article.content, "investocracy" , "AMZN"  );
               flag = 1
             }
         }
@@ -124,9 +125,10 @@ const CollectPltr = async (req, res) => {
 
         var flag = 0
         for (const article of allContent_from_sites) {
+            console.log("URL------>",article.url);
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "PLTR"  );
+              await scrapedDBController.add_to_scraped(article.url , article.title , article.content, "investocracy" , "PLTR"  );
               flag = 1
             }
         }
@@ -150,7 +152,7 @@ const CollectTsla = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "TSLA"  );
+              await scrapedDBController.add_to_scraped(article.url , article.title , article.content, "investocracy" , "TSLA"  );
               flag = 1; 
             }
         }
@@ -175,7 +177,7 @@ const CollectAlpha = async (req, res) => {
         for (const article of allContent_from_sites) {
             const existingArticle = await scraped_dataBase.findOne({ title: article.title });
             if (!existingArticle) {
-              await scrapedDBController.add_to_scraped(article.title, article.content, "investocracy" , "ALPHA" );
+              await scrapedDBController.add_to_scraped(article.url , article.title , article.content, "investocracy" , "ALPHA" );
               flag = 1; 
             }
         }

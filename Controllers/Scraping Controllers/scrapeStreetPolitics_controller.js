@@ -21,9 +21,11 @@ const Collect_Canada = async (req, res) => {
 
     var flag = 0
     for (const article of allContent_from_sites) {
+      console.log("URL------>",article.url);
+      
       const existingArticle = await scraped_dataBase.findOne({ title: article.title });
       if (!existingArticle) {
-        await scrapedDBController.add_to_scraped(article.title, article.content, "streetPoliticsCanada" );
+        await scrapedDBController.add_to_scraped(article.url , article.title, article.content, "streetPoliticsCanada" );
         flag = 1
       }
     }
@@ -49,7 +51,7 @@ const Collect_UK = async (req, res) => {
       const existingArticle = await scraped_dataBase.findOne({ title: article.title });
       if (!existingArticle) {
         flag = 1
-        await scrapedDBController.add_to_scraped(article.title, article.content, "streetPoliticsUK"  );
+        await scrapedDBController.add_to_scraped(article.url , article.title, article.content, "streetPoliticsUK"  );
       }
     }
 
@@ -75,7 +77,7 @@ const Collect_Africa = async (req, res) => {
     for (const article of allContent_from_sites) {
       const existingArticle = await scraped_dataBase.findOne({ title: article.content.title || article.title});
       if (!existingArticle) {
-        await scrapedDBController.add_to_scraped(article.content.title || article.title , article.content.content || article.content, "streetPoliticsAfrica"  );
+        await scrapedDBController.add_to_scraped(article.url||article.content.url , article.content.title || article.title , article.content.content || article.content, "streetPoliticsAfrica"  );
         flag = 1
       }
     }

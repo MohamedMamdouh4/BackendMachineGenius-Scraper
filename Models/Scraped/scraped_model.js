@@ -3,6 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const scrapedSchema = new Schema({
+  url:
+  {
+    type: String,
+    unique: false,
+    required: false, 
+  },
   title:
   {
     type: String,
