@@ -43,7 +43,9 @@ app.get('/', (req, res) => {
 
 // import routes file
 const S_routes = require('./Routes/scrape_routes')
+const T_Router = require("./Routes/twitterScrap.router");
 
+app.use("/twitter",T_Router.twitterRouter)
 app.use('/',S_routes)
 
 
