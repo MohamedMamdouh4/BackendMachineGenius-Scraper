@@ -4,7 +4,14 @@ const {socialAccountModel} = require("../Models/Twitter/socialAccount");
 const twitterScraping = async () => {
   try {
     const accounts = await socialAccountModel.find({});
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: true ,
+    args: [
+    '--disable-http2',
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--enable-features=NetworkService,NetworkServiceInProcess',
+    ]
+  });
     const page = await browser.newPage();
     for (const account of accounts) {        
       await page.goto(`${account.accountLink}`, { waitUntil: "networkidle2" });
