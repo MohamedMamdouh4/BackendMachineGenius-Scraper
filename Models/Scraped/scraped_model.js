@@ -1,45 +1,44 @@
 const { text } = require("body-parser");
+const { Types } = require("mongoose");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const scrapedSchema = new Schema({
-  url:
-  {
+  url: {
     type: String,
     unique: false,
-    required: false, 
+    required: false,
   },
-  title:
-  {
+  title: {
     type: String,
     unique: false,
-    required: false, 
+    required: false,
   },
-  content: 
-  {
+  content: {
     type: String,
-    required: false 
+    required: false,
   },
-  date: 
-  {
-    type: String, 
-    required: false
-  },
-  time: 
-  {
-    type: Number, 
-    required: false
-  },
-  brand:
-  {
+  date: {
     type: String,
-    required: true
+    required: false,
   },
-  stock:
-  {
+  time: {
+    type: Number,
+    required: false,
+  },
+  brand_id: {
+    type: Types.ObjectId,
+    required: true,
+    ref: "brands_collection",
+  },
+  brandName: {
     type: String,
-    required: false
-  }
+    required: false,
+  },
+  stock: {
+    type: String,
+    required: false,
+  },
 });
 
-module.exports = mongoose.model('Scraped', scrapedSchema);
+module.exports = mongoose.model("Scraped", scrapedSchema);
