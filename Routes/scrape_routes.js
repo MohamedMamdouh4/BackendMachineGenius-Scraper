@@ -6,6 +6,7 @@ const msg = "This module to handle the request and response of scrapping"
 const scrapeConrollersSTP = require('../Controllers/Scraping Controllers/scrapeStreetPolitics_controller')
 const scrapeConrollersINV = require('../Controllers/Scraping Controllers/scrapeINVEST_controller')
 const scrapeConrollersMYTH = require('../Controllers/Scraping Controllers/scrapeMyth_controller')
+const scrapeConrollersLB  = require('../Controllers/Scraping Controllers/scrapeLittleBirdie_controller')
 
 router.get('/collect/streetPoliticsCanada', scrapeConrollersSTP.Collect_Canada);
 router.get('/collect/streetPoliticsUK', scrapeConrollersSTP.Collect_UK);
@@ -28,6 +29,9 @@ router.get('/collect/twitter/PLTR' , scrapeConrollersINV.CollectTwitter)
 
 ////////------Myth---------///////////
 router.get('/collect/MYTH', scrapeConrollersMYTH.Collect);
+
+///////-------Little Birdie----///////
+router.get('/collect/littlebirdie' , scrapeConrollersLB.Collect)
 
 module.exports = router;
 module.exports.msg = msg
