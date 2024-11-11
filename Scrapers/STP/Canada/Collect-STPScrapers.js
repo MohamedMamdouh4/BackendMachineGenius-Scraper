@@ -5,7 +5,7 @@ const globalnewsScraper = require('./Globalnews-Scraper');
 
 const scrapeCBC = async () => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: [
             '--disable-http2',
             '--no-sandbox',
