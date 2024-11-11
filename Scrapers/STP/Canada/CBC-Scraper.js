@@ -8,7 +8,7 @@ const scrapeURLs = async (page) => {
       const ScrapeList = document.querySelectorAll("a.card.cardDefault , a.card.cardText , a.card.cardListing.rightImage:not(a.flag-live)");
       return Array.from(ScrapeList).map(Scrape => {
         let href = Scrape.getAttribute("href");
-        const title = Scrape.innerText;
+        const title = Scrape.querySelector("h3").innerText;
         if (!href.startsWith('http')) {
           href = `https://www.cbc.ca${href}`;
         }
