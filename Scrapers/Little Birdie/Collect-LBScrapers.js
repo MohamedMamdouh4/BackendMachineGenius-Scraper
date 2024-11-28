@@ -24,13 +24,13 @@ const scrapeSkyNews = async () => {
             try 
             {
                 const content = await skyNewsScrape.scrapeContentFromURL(page, href);
-                // if(title && content && content!== "Error fetching content" )
+                if(title && content && content!== "Error fetching content" )
                 {
-                    allContent.push({ url: href, title, content });
+                    allContent.push({ url: href, title , content });
                 }
             } catch (error) {
                 console.error(`Error scraping content from ${href}:`, error);
-                allContent.push({ url: href, title, content: 'Error fetching content' });
+                // allContent.push({ url: href, title, content: 'Error fetching content' });
             }
         }
         return allContent;
@@ -63,13 +63,13 @@ const scrapeTheMirror = async () => {
             try 
             {
                 const content = await theMirror.scrapeContentFromURL(page, href);
-                // if(title && content && content!== "Error fetching content" )
+                if(title && content && content!== "Error fetching content" )
                 {
                     allContent.push({ url: href, title, content });
                 }
             } catch (error) {
                 console.error(`Error scraping content from ${href}:`, error);
-                allContent.push({ url: href, title, content: 'Error fetching content' });
+                // allContent.push({ url: href, title, content: 'Error fetching content' });
             }
         }
         return allContent;
@@ -102,13 +102,13 @@ const scrapeTheGurdian = async () => {
             try 
             {
                 const content = await theGuardian.scrapeContentFromURL(page, href);
-                // if(title && content && content!== "Error fetching content" )
+                if(title && content && content!== "Error fetching content" )
                 {
                     allContent.push({ url: href, title, content });
                 }
             } catch (error) {
                 console.error(`Error scraping content from ${href}:`, error);
-                allContent.push({ url: href, title, content: 'Error fetching content' });
+                // allContent.push({ url: href, title, content: 'Error fetching content' });
             }
         }
         return allContent;

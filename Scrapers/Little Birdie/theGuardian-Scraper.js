@@ -22,7 +22,7 @@ const scrapeURLs = async (page) => {
       const ScrapeList = document.querySelectorAll("#container-film ul li a");
       return Array.from(ScrapeList).map((Scrape) => {
         let href = Scrape.getAttribute("href");
-        const title = Scrape.querySelector(".dcr-iuk5cr .dcr-1q9v79k .dcr-147a5s0 h3 span")?.innerText || "No title found";
+        const title = Scrape.querySelector(".dcr-f9aim1 .dcr-1q9v79k .dcr-147a5s0 h3 span")?.innerText || "No title found";
         if (!href.startsWith("http")) {
           href = `https://www.theguardian.com${href}`;
         }

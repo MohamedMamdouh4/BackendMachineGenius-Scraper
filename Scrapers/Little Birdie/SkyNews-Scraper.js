@@ -10,7 +10,7 @@ const scrapeURLs = async (page) => {
       const ScrapeList = document.querySelectorAll(".grid-areas .grid-cell article a");
       return Array.from(ScrapeList).map((Scrape) => {
         let href = Scrape.getAttribute("href");
-        const title = Scrape.innerHTML;
+        const title = Scrape.innerText;
         if (!href.startsWith("http")) {
           href = `https://news.sky.com${href}`;
         }
