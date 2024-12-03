@@ -135,11 +135,12 @@ const Tests = async () => {
       });
       console.log("======== Make new Page =======");
       const page = await browser.newPage();
-      console.log("======== Navigate to CBC =======");
-      await page.setUserAgent(
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-      );
-      console.log("After set Mozilla")
+      console.log("======== create new Page =======");
+    //   await page.setUserAgent(
+    //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    //   );
+    //   console.log("After set Mozilla")
+    await page.setDefaultTimeout(400*1000);
       await page.goto("https://machinegenius.io",{
         waitUntil:'domcontentloaded'
       });
