@@ -5,7 +5,7 @@ const theGuardian = require('./theGuardian-Scraper')
 
 const scrapeSkyNews = async () => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: [
             '--disable-http2',
             '--no-sandbox',
@@ -44,7 +44,7 @@ const scrapeSkyNews = async () => {
 
 const scrapeTheMirror = async () => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: [
             '--disable-http2',
             '--no-sandbox',
@@ -83,7 +83,7 @@ const scrapeTheMirror = async () => {
 
 const scrapeTheGurdian = async () => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: [
             '--disable-http2',
             '--no-sandbox',
