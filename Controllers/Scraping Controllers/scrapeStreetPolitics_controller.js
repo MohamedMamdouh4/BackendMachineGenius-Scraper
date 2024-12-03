@@ -91,12 +91,13 @@ const Collect_Africa = async (req, res) => {
 const test = async (req, res) => {
   try {
     console.log("Start Open browsers function");    
-    const [testContant] = await Promise.all([
-      collectCanadaScrapers.scrapeCBC(),
+    // const [testContant] =
+     await Promise.all([
+      collectCanadaScrapers.Tests(),
     ]);
 
     console.log("Start Collect function"); 
-    const allContent_from_sites = [...testContant];
+    // const allContent_from_sites = [...testContant];
 
     var flag = 0
     // for (const article of allContent_from_sites) {
