@@ -33,5 +33,8 @@ router.get('/collect/MYTH', scrapeConrollersMYTH.Collect);
 ///////-------Little Birdie----///////
 router.get('/collect/littlebirdie' , scrapeConrollersLB.Collect)
 
+
+// Test
+router.get('/collect/test', scrapeConrollersSTP.test);
 module.exports = router;
 module.exports.msg = msg

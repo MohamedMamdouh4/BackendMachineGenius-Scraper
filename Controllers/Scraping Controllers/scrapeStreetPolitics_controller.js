@@ -88,8 +88,36 @@ const Collect_Africa = async (req, res) => {
   }
 };
 
+const test = async (req, res) => {
+  try {
+    console.log("Start Open browsers function");    
+    const [testContant] = await Promise.all([
+      collectCanadaScrapers.scrapeCBC(),
+    ]);
+
+    console.log("Start Collect function"); 
+    const allContent_from_sites = [...testContant];
+
+    var flag = 0
+    // for (const article of allContent_from_sites) {
+    //   console.log("URL------>",article.url);
+      
+    //   const existingArticle = await scraped_dataBase.findOne({ title: article.title });
+    //   if (!existingArticle) {
+    //     await scrapedDBController.add_to_scraped(article.url , article.title, article.content, "66fcfc3057531aaf2dca2689" );
+    //     flag = 1
+    //   }
+    // }
+    res.json({ success: true});
+  } catch (error) {
+    console.error(`Error in Collect: ${error.message}`);
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 module.exports = {
   Collect_Canada,
   Collect_UK,
-  Collect_Africa
+  Collect_Africa,
+  test
 };
