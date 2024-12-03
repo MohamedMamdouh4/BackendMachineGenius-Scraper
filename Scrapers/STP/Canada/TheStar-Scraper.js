@@ -3,10 +3,10 @@ const puppeteer = require('puppeteer');
 const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.thestar.com/politics/", {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
       timeout: 120000
     });
-    // await page.goto('https://www.thestar.com/politics/', { waitUntil: 'domcontentloaded' });
+    // await page.goto('https://www.thestar.com/politics/', { waitUntil: 'load' });
     const URLs = await page.evaluate(() => {
       const ScrapeList = document.querySelectorAll(".tnt-has-block-bg a.tnt-asset-link");
       return Array.from(ScrapeList).map(Scrape => {
@@ -30,7 +30,7 @@ const scrapeURLs = async (page) => {
 const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
       timeout: 120000
     });
     const content = await page.evaluate(() => {

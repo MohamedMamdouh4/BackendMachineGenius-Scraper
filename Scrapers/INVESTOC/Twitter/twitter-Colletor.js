@@ -33,7 +33,7 @@ const TwitterCollector = async (accountUrl) => {
 
   try {
     await page.goto('https://x.com/i/flow/login', { 
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
       timeout: 240000
      });
 

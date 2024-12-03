@@ -4,7 +4,7 @@ const delay = require("../../Utilites/delay_func");
 const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.theguardian.com/uk/film", {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
       timeout: 120000,
     });
 
@@ -40,7 +40,7 @@ const scrapeURLs = async (page) => {
 const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
       timeout: 120000,
     });
 

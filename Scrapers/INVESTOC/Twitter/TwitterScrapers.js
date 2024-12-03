@@ -3,7 +3,7 @@ const Clean = require('../../../Utilites/clean_content')
 
 const scrapeURLs = async (page, url) => {
   await page.goto(url, {
-    waitUntil: "domcontentloaded",
+    waitUntil: "load",
     timeout: 280000
   });
 
@@ -58,7 +58,7 @@ const scrapeContentFromURL = async (browser, urls) => {
       try 
       {
         await page.goto(href, {
-          waitUntil: "domcontentloaded",
+          waitUntil: "load",
           timeout: 280000 
         });
 

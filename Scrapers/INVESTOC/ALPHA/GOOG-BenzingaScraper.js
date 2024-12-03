@@ -25,7 +25,7 @@ const scrapeURLs = async (page) => {
 const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
     });
     const content = await page.evaluate(() => {
     const ScrapeList = document.querySelector(".article-content-body .article-content-body-only");

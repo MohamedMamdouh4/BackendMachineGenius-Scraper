@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.fool.com/quote/nasdaq/amzn/", {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
       timeout: 120000
     });
     const URLs = await page.evaluate(() => {
@@ -29,7 +29,7 @@ const scrapeURLs = async (page) => {
 const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
       timeout: 120000
     });
     const content = await page.evaluate(() => {

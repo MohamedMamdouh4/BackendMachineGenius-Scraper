@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.benzinga.com/quote/NVDA/news", {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
     });
     const URLs = await page.evaluate(() => {
       const ScrapeList = document.querySelectorAll(".news-content div ul li a");
@@ -28,7 +28,7 @@ const scrapeURLs = async (page) => {
 const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
     });
     const content = await page.evaluate(() => {
     const ScrapeList = document.querySelector(".article-content-body .article-content-body-only");

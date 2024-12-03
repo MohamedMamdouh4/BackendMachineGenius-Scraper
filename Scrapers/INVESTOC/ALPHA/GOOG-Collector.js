@@ -44,7 +44,7 @@ const scrape_Fool = async () => {
             console.log(`Scraping URLs from: ${site}`);
                     
             await page.goto(site, {
-                waitUntil: "domcontentloaded",
+                waitUntil: "load",
                 timeout: 120000
             });
       
@@ -92,7 +92,7 @@ const scrape_Investor = async () => {
             console.log(`Scraping URLs from: ${site}`);
                     
             await page.goto(site, {
-                waitUntil: "domcontentloaded",
+                waitUntil: "load",
                 timeout: 120000
             });
       
@@ -140,7 +140,7 @@ const scrape_Benzinga = async () => {
             console.log(`Scraping URLs from: ${site}`);
                     
             await page.goto(site, {
-                waitUntil: "domcontentloaded",
+                waitUntil: "load",
                 timeout: 120000
             });
       
