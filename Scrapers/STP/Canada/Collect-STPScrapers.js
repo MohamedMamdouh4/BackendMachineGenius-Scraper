@@ -156,12 +156,13 @@ const Tests = async () => {
     page.setDefaultTimeout(400 * 1000);
     console.log("======== create new Page =======");
     await page.setUserAgent(
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     );
     console.log("After set Mozilla");
-    await page.goto("https://machinegenius.io", {
+    const res = await page.goto("http://localhost:80", {
       waitUntil: "domcontentloaded",
     });
+    console.log({ res });
     console.log("===================== After Go to =======================");
     await delay(4000);
 
