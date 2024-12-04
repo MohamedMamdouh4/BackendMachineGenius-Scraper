@@ -92,9 +92,9 @@ const test = async (req, res) => {
   try {
     console.log("Start Open browsers function");    
     // const [testContant] =
-     await Promise.all([
-      collectCanadaScrapers.Tests(),
-    ]);
+     
+    await collectCanadaScrapers.Tests(),
+    
 
     console.log("Start Collect function"); 
     // const allContent_from_sites = [...testContant];
