@@ -142,7 +142,7 @@ const Tests = async () => {
   try {
     console.log("Start new puppeteer");
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: [
         "--disable-http2",
         "--no-sandbox",
@@ -152,12 +152,13 @@ const Tests = async () => {
     });
     console.log("======== Make new Page =======");
     const page = await browser.newPage();
-    console.log("======== create new Page =======");
-      await page.setUserAgent(
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-      );
-      console.log("After set Mozilla")
+    page.setDefaultNavigationTimeout(400000); // For navigation
     page.setDefaultTimeout(400 * 1000);
+    console.log("======== create new Page =======");
+    await page.setUserAgent(
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    );
+    console.log("After set Mozilla");
     await page.goto("https://machinegenius.io", {
       waitUntil: "domcontentloaded",
     });
