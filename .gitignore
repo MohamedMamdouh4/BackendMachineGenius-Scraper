@@ -3,3 +3,5 @@
 
 # Dotenv environment variables file
 .env
+
+yarn.lock
