@@ -4,7 +4,7 @@ const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.independent.co.uk/news/world/africa", {
       waitUntil: "load",
-      timeout: 120000
+      timeout: 180000 
     });
     const URLs = await page.evaluate(() => {
       const ScrapeList = document.querySelectorAll("#sectionContent a");
@@ -28,7 +28,7 @@ const scrapeContentFromURL = async (page, url) => {
     try {
       await page.goto(url, {
         waitUntil: "load",
-        timeout: 120000
+        timeout: 180000 
       });
   
       const content = await page.evaluate(() => {

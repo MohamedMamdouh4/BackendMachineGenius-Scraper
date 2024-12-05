@@ -5,7 +5,7 @@ const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.theguardian.com/uk/film", {
       waitUntil: "load",
-      timeout: 120000,
+      timeout: 180000 ,
     });
 
     await delay.delay(12000); 
@@ -41,7 +41,7 @@ const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
       waitUntil: "load",
-      timeout: 120000,
+      timeout: 180000 ,
     });
 
     const content = await page.evaluate(() => {

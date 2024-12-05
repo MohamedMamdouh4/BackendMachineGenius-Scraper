@@ -27,7 +27,7 @@ const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
       waitUntil: "load",
-      timeout: 120000
+      timeout: 180000 
     });
     const content = await page.evaluate(() => {
     const ScrapeList = document.querySelector(".article-body");

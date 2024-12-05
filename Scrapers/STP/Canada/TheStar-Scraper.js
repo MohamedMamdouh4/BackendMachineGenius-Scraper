@@ -4,7 +4,7 @@ const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.thestar.com/politics/", {
       waitUntil: "load",
-      timeout: 120000
+      timeout: 180000 
     });
     // await page.goto('https://www.thestar.com/politics/', { waitUntil: 'load' });
     const URLs = await page.evaluate(() => {
@@ -31,7 +31,7 @@ const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
       waitUntil: "load",
-      timeout: 120000
+      timeout: 180000 
     });
     const content = await page.evaluate(() => {
     const ScrapeList = document.querySelector(".asset-body");

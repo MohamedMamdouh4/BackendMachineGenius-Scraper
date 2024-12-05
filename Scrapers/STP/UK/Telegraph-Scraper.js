@@ -4,7 +4,7 @@ const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.telegraph.co.uk/politics/", {
       waitUntil: "load",
-      timeout: 120000
+      timeout: 180000 
     });
     const URLs = await page.evaluate(() => {
       const ScrapeList = document.querySelectorAll(".article-list.article-list-six-col.article-list--six-col ul li a");
@@ -28,7 +28,7 @@ const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
       waitUntil: "load",
-      timeout: 120000
+      timeout: 180000 
     });
     const content = await page.evaluate(() => {
       const ScrapeList = document.querySelector("div[data-test='tpl-article-body-recipe']");

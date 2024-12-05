@@ -3,7 +3,7 @@ const scrapeURLs = async (page) => {
   try {
     await page.goto("https://www.africanews.com/news/", {
       waitUntil: "load",
-      timeout: 120000
+      timeout: 180000 
     });
     const URLs = await page.evaluate(() => {
       const ScrapeList = document.querySelectorAll(".layout.theme-block__spacer.jsArticleList h3 a");
@@ -34,7 +34,7 @@ const scrapeContentFromURL = async (page, url) => {
   try {
     await page.goto(url, {
       waitUntil: "load",
-      timeout: 120000
+      timeout: 180000 
     });
 
     const content = await page.evaluate(() => {

@@ -45,7 +45,7 @@ const scrape_Fool = async () => {
                     
             await page.goto(site, {
                 waitUntil: "load",
-                timeout: 120000
+                timeout: 180000 
             });
       
             const URLs = await FoolScrape.scrapeURLs(page);            
@@ -93,7 +93,7 @@ const scrape_Investor = async () => {
                     
             await page.goto(site, {
                 waitUntil: "load",
-                timeout: 120000
+                timeout: 180000 
             });
       
             const URLs = await InvetorScrape.scrapeURLs(page);            
@@ -141,7 +141,7 @@ const scrape_Benzinga = async () => {
                     
             await page.goto(site, {
                 waitUntil: "load",
-                timeout: 120000
+                timeout: 180000 
             });
       
             const URLs = await BenzingaScrape.scrapeURLs(page);            

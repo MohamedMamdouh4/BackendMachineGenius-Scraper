@@ -147,7 +147,7 @@ const scrapeIssafrica= async () => {
         
         await page.goto(site, {
           waitUntil: "load",
-          timeout: 120000
+          timeout: 180000 
         });
     
         const URLs = await isstodayScraper.scrapeURLs(page);
